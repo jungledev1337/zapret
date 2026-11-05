@@ -1,0 +1,30 @@
+# Custom domains list for DPI bypass
+# Telegram Domains
+telegram.org
+t.me
+telegra.ph
+telesco.pe
+web.telegram.org
+k.web.telegram.org
+a.web.telegram.org
+z.web.telegram.org
+stel.com
+cdn-telegram.org
+telegram-cdn.org
+tx.me
+fragment.com
+venus.web.telegram.org
+aurora.web.telegram.org
+vesta.web.telegram.org
+flora.web.telegram.org
+pluto.web.telegram.org
+
+# Additional Discord endpoints
+discord.com
+discord.gg
+discord.media
+discordapp.com
+discordapp.net
+discordcdn.com
+gateway.discord.gg
+status.discord.com

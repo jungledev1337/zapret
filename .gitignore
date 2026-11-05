@@ -1,0 +1,23 @@
+# Rust build artifacts
+target/
+app/target/
+**/*.rs.bk
+
+# Local configuration & user state
+settings.json
+
+# Logs & temp files
+*.log
+*.tmp
+*.bak
+
+# IDE & Editor caches
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific
+Thumbs.db
+Desktop.ini
+.DS_Store

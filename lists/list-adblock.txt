@@ -1,0 +1,16 @@
+# YouTube & Google Adblock hostlist (dpi-desync=rst)
+pagead2.googlesyndication.com
+ad.doubleclick.net
+googleads.g.doubleclick.net
+pubads.g.doubleclick.net
+securepubads.g.doubleclick.net
+video-ad-stats.googlevideo.com
+s0.2mdn.net
+static.doubleclick.net
+adservice.google.com
+ade.googlesyndication.com
+pagead2.googleadservices.com
+partnerad.l.google.com
+adclick.g.doubleclick.net
+ads.youtube.com
+youtubeads.l.google.com
