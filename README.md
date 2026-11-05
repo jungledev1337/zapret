@@ -1,170 +1,175 @@
-# zapret — High-Performance DPI Bypass Suite (Windows & Linux)
+# zapret — Обход блокировок Discord, Telegram и YouTube (Windows & Linux)
 
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-blue?style=flat-square)](https://github.com/jungledev1337/zapret)
-[![Rust](https://img.shields.io/badge/GUI-Rust%20%28eframe%2Fegui%29-orange?style=flat-square)](https://github.com/jungledev1337/zapret)
-[![Engine](https://img.shields.io/badge/engine-WinDivert%20%7C%20NFQUEUE-green?style=flat-square)](https://github.com/jungledev1337/zapret)
-[![License: MIT](https://img.shields.io/badge/license-MIT-purple?style=flat-square)](LICENSE)
-[![Creator](https://img.shields.io/badge/developer-%40jungle__dev-black?style=flat-square)](https://t.me/jungle_dev)
+[![Платформа](https://img.shields.io/badge/платформа-Windows%20%7C%20Linux-blue?style=flat-square)](https://github.com/jungledev1337/zapret)
+[![Интерфейс](https://img.shields.io/badge/GUI-Rust%20%28Liquid%20Glass%29-orange?style=flat-square)](https://github.com/jungledev1337/zapret)
+[![Движок](https://img.shields.io/badge/движок-WinDivert%20%7C%20NFQUEUE-green?style=flat-square)](https://github.com/jungledev1337/zapret)
+[![Лицензия: MIT](https://img.shields.io/badge/лицензия-MIT-purple?style=flat-square)](LICENSE)
+[![Разработчик](https://img.shields.io/badge/разработчик-%40jungle__dev-black?style=flat-square)](https://t.me/jungle_dev)
 
-> **Autonomous Deep Packet Inspection (DPI) circumvention suite with zero VPN overhead.**  
-> Native frosted liquid-glass GUI for Windows 10/11 + high-throughput NFQUEUE engine for Linux (Ubuntu, Debian, Arch, Fedora, ARM64/Raspberry Pi).
-
----
-
-## ⚡ Key Highlights
-
-- **Discord Unblock**: Fixes infinite "Connecting..." and "RTC Connecting" on voice channels, WebRTC media streams (`19294-19344`, `50000-50100/UDP`), gateway, and file servers (`discord.media`).
-- **Telegram Acceleration**: Instant media download and seamless MTProto DC1–DC5 proxy bypass (`91.108.0.0/16`, `149.154.0.0/16`) without third-party VPN latency.
-- **YouTube 4K & AdBlock**: Unthrottled 4K 60FPS video playback (fixes buffer stutters on `googlevideo.com`) paired with an **in-engine TCP RST ad-blocker** that drops Google ad-networks instantly without browser extensions.
-- **Dual Platform (Windows & Linux)**:
-  - **Windows**: Modern, lightweight (~4MB) native Rust GUI with Apple VisionOS-inspired acrylic blur, compact toggle switches, draggable title bar, and auto-elevating UAC support.
-  - **Linux**: High-performance `nfqws` daemon supporting systemd, auto architecture detection (`x86_64` & `aarch64`/`arm64`), automated `iptables`/`nftables` packet queues, and clean SIGINT trap handlers.
-- **Zero Configuration Required**: Download, run, and everything works out of the box.
+> **Автономный комплекс локальной десинхронизации пакетов (DPI bypass) с нулевой задержкой и без использования сторонних VPN-серверов.**  
+> Нативный стеклянный интерфейс в стиле Liquid Glass для Windows 10/11 и высокопроизводительный сервис NFQUEUE для Linux (Ubuntu, Debian, Arch, Fedora, ARM64 / Raspberry Pi).
 
 ---
 
-## 🖥️ Windows Quick Start
+## ⚡ Что решает этот софт
 
-### 1. Download & Launch GUI
-1. Clone or download the repository:
+- **Полная разблокировка Discord**:
+  - Голосовые каналы и звонки (WebRTC UDP `19294-19344`, `50000-50100`). Исправляет бесконечное «Подключение к RTC», «Подключение...» и серый экран.
+  - Текстовые каналы, медиа-серверы и загрузка вложений (`discord.media`, gateway).
+- **Прямой доступ к Telegram без сторонних прокси**:
+  - Автоматический пропуск трафика MTProto всех дата-центров DC1–DC5 (`91.108.0.0/16`, `149.154.0.0/16`).
+  - Быстрая отправка файлов и видеозвонки без поиска рабочих MTProxy и риска утечки данных.
+- **YouTube в 4K 60FPS + Встроенный анти-рекламный фильтр**:
+  - Снятие замедления видеопотоков (`googlevideo.com`), убирает бесконечную буферизацию.
+  - **Встроенная блокировка рекламы**: движок перехватывает запросы к рекламным серверам Google (`list-adblock.txt`) и мгновенно сбрасывает их через сетевой TCP RST — плеер пропускает рекламу без задержек и без необходимости ставить тяжелые расширения в браузер.
+- **Полноценная поддержка двух систем (Windows и Linux)**:
+  - Никаких недоделок: под Windows работает красивый легковесный GUI на Rust с блюром, под Linux — готовые демоны systemd под x86_64 и ARM64.
+- **Никакого VPN**:
+  - Ваш реальный IP и пинг в онлайн-играх не меняются, скорость тарифа не режется, трафик не идёт через чужие подозрительные сервера.
+
+---
+
+## 🖥️ Быстрый старт на Windows
+
+### Запуск через графический интерфейс (GUI)
+1. Скачайте репозиторий (зеленая кнопка **Code** → **Download ZIP**) или клонируйте:
    ```cmd
    git clone https://github.com/jungledev1337/zapret.git
    cd zapret
    ```
-2. Run **`zapret.exe`**.  
-   *The application will automatically request Administrator privileges via UAC to interact with the high-speed WinDivert network filter driver.*
-3. Toggle Discord, Telegram, or YouTube on/off in real-time. Preferences are saved automatically to `settings.json`.
+2. Запустите файл **`zapret.exe`**.
+3. Программа автоматически запросит права Администратора (через стандартный UAC Windows) для взаимодействия с драйвером фильтрации пакетов `WinDivert`.
+4. В открывшемся окне тумблерами включите нужные сервисы (Discord / Telegram / YouTube). Настройки сохраняются автоматически. Окно можно перетаскивать за шапку и сворачивать.
 
-### Console Alternative (Batch)
-If you prefer running without GUI:
-- Start: Right-click **`1_START_ZAPRET.bat`** → Run as Administrator.
-- Stop: Run **`2_STOP_ZAPRET.bat`**.
+### Альтернативный запуск через консоль (без интерфейса)
+- **Запуск**: Нажмите правой кнопкой мыши на **`1_START_ZAPRET.bat`** → *Запуск от имени администратора*.
+- **Остановка**: Запустите **`2_STOP_ZAPRET.bat`**.
 
 ---
 
-## 🐧 Linux Quick Start (Ubuntu / Debian / Arch / Fedora / Alpine)
+## 🐧 Быстрый старт на Linux (Ubuntu / Debian / Arch / Fedora / ARM64)
 
-Zapret includes precompiled ELF binaries for both `x86_64` (AMD64) and `aarch64` (ARM64).
+В комплекте уже идут скомпилированные бинарники `nfqws` для обеих архитектур: **x86_64** (ПК и серверы) и **aarch64 / arm64** (ноутбуки на ARM, одноплатники Raspberry Pi).
 
-### Standalone Runner
+### Обычный запуск в терминале
 ```bash
 git clone https://github.com/jungledev1337/zapret.git
 cd zapret/linux
 chmod +x start.sh stop.sh
 
-# Start the bypass daemon
+# Запуск службы обхода
 sudo ./start.sh
 
-# Stop and flush iptables NFQUEUE rules cleanly
+# Остановка и чистка правил iptables
 sudo ./stop.sh
 ```
 
-### Run as a Background Systemd Service
-To ensure Zapret starts automatically on system boot:
+### Автозапуск в фоне как системный сервис (systemd)
+Чтобы служба автоматически поднималась при включении ПК или сервера:
 ```bash
 cd zapret/linux
 sudo cp zapret.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now zapret
 ```
-Check service status:
+Проверить статус службы:
 ```bash
 sudo systemctl status zapret
 ```
 
 ---
 
-## 🔬 How It Works (Packet Desynchronization)
+## 🔬 Как это работает (Десинхронизация DPI)
 
-Unlike VPNs that encrypt and route all traffic through remote servers (increasing ping and causing captchas), **zapret** runs locally on your network interface.
+В отличие от VPN, который шифрует абсолютно весь трафик и гонит его через чужой сервер, **zapret работает локально прямо на вашем сетевом интерфейсе**:
 
 ```text
                +-------------------------------------------+
-               |              Outbound Traffic             |
+               |              Исходящий трафик             |
                +---------------------+---------------------+
                                      |
                +---------------------v---------------------+
-               |   Target Matches (Discord/TG/YouTube)?    |
+               |   Адрес есть в списках (Discord/TG/YT)?   |
                +----------+-----------------------+--------+
                           |                       |
-                         YES                      NO
+                          ДА                     НЕТ
                           |                       |
                +----------v----------+    +-------v-------+
-               |  DPI Packet Desync  |    | Direct Pass   |
-               |  - Fake QUIC / UDP  |    | (No Overhead) |
-               |  - 2-Byte Split     |    +---------------+
+               | Модификация пакетов |    | Прямой трафик |
+               |  - Fake QUIC / UDP  |    | (Без задержек)|
+               |  - Сплит TLS (SNI)  |    +---------------+
                |  - Seq Overlap      |
-               |  - Instant Ad-RST   |
+               |  - Сброс рекламы RST|
                +----------+----------+
                           |
                +----------v--------------------------------+
-               | TSP / ISP DPI Sensor Fooled & Bypassed   |
+               | Оборудование ТСПУ провайдера обмануто     |
                +-------------------------------------------+
 ```
 
-1. **TCP Multisplit & Sequence Overlap**: Splits TLS ClientHello packets at the first byte (`--dpi-desync-split-pos=1`) with fake SNI prefixes (`--dpi-desync-split-seqovl`). The DPI filter fails to assemble the SNI, while target servers seamlessly reconstruct the stream.
-2. **Discord Voice Fake UDP**: Discord voice channels rely on proprietary UDP packets. Zapret injects active fake packet payloads (`ACTIVE_DISCORD_UDP.bin`) with repeated desync passes, breaking DPI throttling without disrupting WebRTC audio.
-3. **In-Engine Ad-Blocking**: Outbound handshakes to known telemetry and advertising endpoints (`list-adblock.txt`) receive a synthetic TCP RST, causing YouTube's player to skip ads in zero milliseconds.
+1. **Мультисплит TCP и Sequence Overlap**: TLS ClientHello разделяется на первом байте (`--dpi-desync-split-pos=1`) с наложением фейковых данных (`--dpi-desync-split-seqovl`). ТСПУ провайдера не может собрать имя хоста (SNI) и пропускает соединение, а конечный сервер собирает поток без ошибок.
+2. **Фейковый UDP для голосовых каналов Discord**: Голосовой протокол Discord передаёт кастомные WebRTC-пакеты. Утилита подмешивает активные сигнатуры (`ACTIVE_DISCORD_UDP.bin`), сбивая детектор глушилок.
+3. **Блокировка рекламы на сетевом уровне**: Запросы плеера к рекламным сетям Google мгновенно обрываются флагом TCP RST. Видеоплеер YouTube сразу считает, что реклама недоступна, и мгновенно воспроизводит само видео.
 
 ---
 
-## 📂 Repository Structure
+## 📂 Структура проекта
 
 ```text
-├── app/                  # Pure Rust GUI source code
+├── app/                  # Исходный код графического интерфейса на Rust
 │   ├── src/
-│   │   ├── main.rs       # Window lifecycle, acrylic backdrop & tray
-│   │   ├── lib.rs        # Modular library crate (zapret_lib)
-│   │   ├── engine.rs     # Process orchestration & WinDivert/NFQWS rule builder
-│   │   ├── ui.rs         # Apple-style toggles & macOS traffic light controls
-│   │   └── config.rs     # JSON settings persistence
-│   ├── build.rs          # MSVC UAC elevation manifest linker
-│   └── tests/            # Automated unit tests (ports, args, serialization)
-├── bin/                  # Windows x64 WinDivert driver & winws binaries
-├── linux/                # Linux NFQUEUE runner suite
-│   ├── bin/              # Precompiled binaries (x86_64 & arm64)
-│   ├── start.sh          # Auto-architecture detection & iptables queue binding
-│   ├── stop.sh           # Clean queue flushing & process termination
-│   └── zapret.service    # Systemd daemon configuration
-├── lists/                # Target domain lists & Telegram IP subnets
-│   ├── list-general.txt  # Discord, cloud services, and global blocks
-│   ├── list-google.txt   # Google & YouTube video playback CDN servers
-│   ├── list-adblock.txt  # YouTube ad server endpoints for instant RST
-│   └── ipset-all.txt     # Telegram DC1-DC5 CIDR subnets
-├── zapret.exe            # Ready-to-run Windows 64-bit executable
-├── 1_START_ZAPRET.bat    # Windows CMD launcher (auto-elevating fallback)
-├── 2_STOP_ZAPRET.bat     # Windows stop script
-└── LICENSE               # MIT License
+│   │   ├── main.rs       # Точка входа, Acrylic блюр Windows 11, рендер
+│   │   ├── lib.rs        # Модульная библиотека (zapret_lib)
+│   │   ├── engine.rs     # Управление процессами winws / nfqws
+│   │   ├── ui.rs         # Векторные кнопки macOS, переключатели iOS
+│   │   └── config.rs     # Авто-сохранение настроек в JSON
+│   ├── build.rs          # Встраивание UAC-манифеста администратора
+│   └── tests/            # Автоматические тесты параметров и портов
+├── bin/                  # Драйвер WinDivert 64-bit и утилиты winws для Windows
+├── linux/                # Набор для Linux (NFQUEUE)
+│   ├── bin/              # Бинарники nfqws (папки x86_64 и arm64)
+│   ├── start.sh          # Скрипт авто-определения архитектуры и запуска iptables
+│   ├── stop.sh           # Скрипт корректной очистки правил сети
+│   └── zapret.service    # Конфиг автозапуска systemd
+├── lists/                # Списки блокировок, рекламы и подсетей
+│   ├── list-general.txt  # Домены Discord, глобальные сервисы
+│   ├── list-google.txt   # Серверы потокового видео YouTube
+│   ├── list-adblock.txt  # Серверы показа рекламы для мгновенного сброса
+│   └── ipset-all.txt     # IP-диапазоны дата-центров Telegram DC1-DC5
+├── zapret.exe            # Готовый исполняемый файл для Windows
+├── 1_START_ZAPRET.bat    # Консольный запуск для Windows (с авто-UAC)
+├── 2_STOP_ZAPRET.bat     # Остановка процессов и выгрузка драйвера
+└── LICENSE               # Лицензия MIT
 ```
 
 ---
 
-## 🛠️ Building from Source
+## 🛠️ Самостоятельная сборка из исходников
 
-### Prerequisites
-- [Rust](https://rustup.rs/) (edition 2021+)
-- Windows 10/11 or modern Linux distribution
+Если вы хотите собрать бинарник GUI самостоятельно:
+1. Установите [Rust](https://rustup.rs/).
+2. В терминале:
+   ```cmd
+   cd app
+   cargo build --release
+   ```
+Скомпилированный файл появится по пути `app/target/release/zapret.exe`.
 
-```bash
+Запуск тестов:
+```cmd
 cd app
-cargo build --release
-```
-The compiled binary will be located at `app/target/release/zapret` (`.exe` on Windows).
-
-Run test suite:
-```bash
 cargo test
 ```
 
 ---
 
-## 👤 Author
+## 👤 Автор
 
-Developed and maintained by **[@jungle_dev](https://t.me/jungle_dev)**.  
+Разработка и сборка: **[@jungle_dev](https://t.me/jungle_dev)**  
 GitHub: **[jungledev1337](https://github.com/jungledev1337)**
 
 ---
 
-## ⚖️ License
+## ⚖️ Лицензия
 
-Distributed under the [MIT License](LICENSE).
+Проект распространяется под свободной лицензией [MIT](LICENSE).
